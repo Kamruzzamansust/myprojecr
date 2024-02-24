@@ -14,7 +14,8 @@ app.add_middleware(
 )
 
 # Load your data
-df = pd.read_csv('Data/data.csv')
+df = pd.read_csv(r'D:\All_data_science_project\Machine Learning\Full\Data\data.csv')
+
 
 @app.get("/data")
 async def get_data():
@@ -25,3 +26,13 @@ async def calculate_missing_values():
     missing_values = df.isna().sum().to_dict()
     
     print(missing_values)
+
+# @app.get("/Analysis/{gender}")
+# async def get_analysis(gender: str):
+#     # Filter DataFrame based on gender
+#     filtered_df = df[df['gender'].str.lower() == gender.lower()]
+    
+#     # Perform analysis on the filtered DataFrame
+    
+    
+#     return filtered_df.to_dict(orient="records")

@@ -1,7 +1,7 @@
 import pandas as pd 
 import streamlit as st 
 import requests
-from src.loding_data import * #load_data, get_data_from_fastapi,calculate_missing_values,get_info
+from src.loding_data import load_data, get_data_from_fastapi,calculate_missing_values,get_info
 
 
 
@@ -21,7 +21,8 @@ st.set_page_config(
 
 FASTAPI_URL = "http://127.0.0.1:8000/"
 
-df=load_data('Data\data.csv')
+df=load_data(r'D:\All_data_science_project\Machine Learning\Full\Data\data.csv')
+print(df)
 #st.write(df.head(10))
 
 col1, col2, col3 = st.columns([2, 2, 2])
@@ -57,10 +58,11 @@ with col1:
             data = get_data_from_fastapi(FASTAPI_URL)
             if data is not None:
                 with st.expander("This is the Dataframe", expanded=True):
+                  st.data_editor(data,width=1000,disabled=False)
 
 
 
-                    st.data_editor(data,width=1000,disabled=False)
+                  
     with st.container(border=True):
         col6, col7,col8 = st.columns([2,2,2])
         with col6:
@@ -94,7 +96,7 @@ with col2:
            
 
            
-            with st.expander("Missing Values"):
+        with st.expander("Missing Values"):
                     if st.button("Check Mising Values"):
                         data = get_data_from_fastapi(FASTAPI_URL)
                         if data is not None:
@@ -105,7 +107,7 @@ with col2:
                             else:
                                     st.write("No missing values.")
             
-            with st.expander("Check data types"):
+        with st.expander("Check data types"):
                  if st.button("data types"):
                         data = get_data_from_fastapi(FASTAPI_URL)
                         if data is not None:

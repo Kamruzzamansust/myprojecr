@@ -3,22 +3,23 @@ import pandas as pd
 import requests
 
 
-@st.cache_data
+
 def load_data(path):
     df = pd.read_csv(path)
     return df
 
 
 
-
+FASTAPI_URL = "http://127.0.0.1:8000/"
 
 # Function to make a request to FastAPI backend
 def get_data_from_fastapi(FASTAPI_URL):
     response = requests.get(FASTAPI_URL + "data")
     if response.status_code == 200:
         data = response.json()
-        data = pd.DataFrame(data) 
-        return data
+        data = pd.DataFrame(data)
+        return data 
+        
     else:
         st.error("Failed to fetch data from FastAPI backend")
 
